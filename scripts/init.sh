@@ -2,6 +2,10 @@
 
 export DBT_PROJECT_PATH=/project
 
+git clone https://github.com/konosp/adobe-clickstream-dbt.git \
+    && mkdir /project/dbt \
+    && mv adobe-clickstream-dbt/* /project/dbt/
+
 mkdir /root/.dbt \
     && cp $DBT_PROJECT_PATH/misc/profile-demo.yml /root/.dbt/profiles.yml \
     && cd $DBT_PROJECT_PATH/dbt \

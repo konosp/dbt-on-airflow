@@ -43,7 +43,7 @@ def get_node_structure():
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': days_ago(2),
+    'start_date': days_ago(5),
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
@@ -71,7 +71,7 @@ dag = DAG(
     'second_attempt',
     default_args=default_args,
     description='Managing dbt data pipeline',
-    schedule_interval = None,
+    schedule_interval = '@daily',
 )
 # [END instantiate_dag]
 
@@ -79,9 +79,11 @@ nodes = get_node_structure()
 operators = {}
 for node in nodes:
     # date = """{{ macros.ds_format(ts_nodash, "%Y%m%dT%H%M%S", "%Y-%m-%d-%H-%M") }}"""
-    date = "{{ ds }}"
-    print('MACRO : {}'.format(date))
-    bsh_cmd = 'cd /project/dbt && dbt run --models {nodeName} --vars \'{{"start_date":"2020-02-15 15:00:00 UTC", "end_date":"2020-02-15 15:20:00 UTC"}}\' --full-refresh'.format(nodeName = node)
+    date_end = "{{ ds }}"
+    date_start = "{{ yesterday_ds }}"
+    # print('MACRO : {}'.format(date))
+    # bsh_cmd = 'cd /project/dbt && dbt run --models {nodeName} --vars \'"start_date":"2020-02-15 15:00:00 UTC", "end_date":"2020-02-15 15:20:00 UTC"}}\' --full-refresh'.format(nodeName = node, date_start = date_start, date_end = date_end)
+    bsh_cmd = 'cd /project/dbt && dbt run --models {nodeName} --vars \'{{"start_date":"{start_date}", "end_date":"{end_date}"}}\' '.format(nodeName = node, start_date = date_start, end_date = date_end)
     tmp_operator = BashOperator(
         task_id= node,
         bash_command=bsh_cmd,

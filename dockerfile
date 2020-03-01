@@ -8,7 +8,6 @@ RUN pip install dbt==0.15.2 \
 RUN mkdir /project
 COPY scripts/ /project/scripts/
 COPY misc/ /project/misc/
-COPY dbt/ /project/dbt/
 COPY airflow/ /project/airflow/
 
 EXPOSE 8080
