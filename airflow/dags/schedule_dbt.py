@@ -68,7 +68,7 @@ default_args = {
 # [START instantiate_dag]
 
 dag = DAG(
-    'second_attempt',
+    'Daily dbt models',
     default_args=default_args,
     description='Managing dbt data pipeline',
     schedule_interval = '@daily',

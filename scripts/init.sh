@@ -11,10 +11,9 @@ mkdir /root/.dbt \
     && cd $DBT_PROJECT_PATH/dbt \
     && dbt compile
 
-#
-airflow initdb &&
-    ## cp $DBT_PROJECT_PATH/airflow/airflow.cfg /root/airflow/ &&
-    mkdir /root/airflow/dags &&
-    cp $DBT_PROJECT_PATH/airflow/dags/* /root/airflow/dags/ \
-    && airflow scheduler \
-    & airflow webserver
+mkdir /root/airflow \
+    && cp $DBT_PROJECT_PATH/airflow/airflow.cfg /root/airflow/ \
+    && mkdir /root/airflow/dags \
+    && cp $DBT_PROJECT_PATH/airflow/dags/* /root/airflow/dags/ \
+    && airflow initdb \
+    && airflow scheduler & airflow webserver

@@ -2,7 +2,7 @@ FROM python:3.7
 
 RUN export AIRFLOW_HOME=/user/airflow
 
-RUN pip install dbt==0.15.2 \
+RUN pip install dbt==0.15.0 \
     && pip install apache-airflow
 
 RUN mkdir /project
