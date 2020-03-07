@@ -2,9 +2,22 @@
 
 export DBT_PROJECT_PATH=/project
 
-git clone https://github.com/konosp/adobe-clickstream-dbt.git \
-    && mkdir /project/dbt \
-    && mv adobe-clickstream-dbt/* /project/dbt/
+if [[ "$1" != "" ]]; then
+    GITREPO="$1"
+elif [[ "$1" = "" ]]; then
+    echo "Need dbt project URL. Exiting.."
+    exit;
+fi
+
+mkdir /tmpdata \
+    && cd /tmpdata \
+    && git clone $GITREPO
+
+folders=*/; 
+
+mkdir /project/dbt \
+    && mv ${folders[0]}/* /project/dbt/ \
+    && rm -rf /tmpdata
 
 mkdir /root/.dbt \
     && cp $DBT_PROJECT_PATH/misc/profile-demo.yml /root/.dbt/profiles.yml \
