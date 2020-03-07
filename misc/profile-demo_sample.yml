@@ -1,0 +1,18 @@
+# For more information on how to configure this file, please see:
+# https://docs.getdbt.com/docs/profile
+
+adobe-clickstream-bigquery:
+  target: docker-dev
+  outputs:
+
+    # Target will execute within the context of Docker. Service account key is needed
+    docker-dev:
+      type: bigquery
+      method: service-account
+      project: < BigQuery project id >
+      dataset: < BigQuery dataset id >
+      threads: 1
+      timeout_seconds: 300
+      location: EU # Optional, one of US or EU
+      priority: interactive
+      keyfile: ../misc/service_account_key.json
