@@ -66,6 +66,8 @@ for node in nodes:
     )
     operators[node] = tmp_operator
 
+# Parse nodes and assign operator dependencies
 for node in nodes:
     for parent in nodes[node]:
-        operators[node] << operators[parent]
+        if (parent != None):
+            operators[parent] >> operators[node]
