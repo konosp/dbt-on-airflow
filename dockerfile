@@ -1,7 +1,7 @@
 FROM python:3.7
 
 RUN pip install dbt==0.15.0 \
-    && pip install apache-airflow
+    && pip install 'apache-airflow==1.10.14'
 
 RUN mkdir /project
 COPY scripts/ /project/scripts/

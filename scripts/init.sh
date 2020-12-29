@@ -2,6 +2,9 @@
 
 export DBT_PROJECT_PATH=/project
 
+AIRFLOW__WEBSERVER__SECRET_KEY="openssl rand -hex 30"
+export AIRFLOW__WEBSERVER__SECRET_KEY
+
 if [[ "$1" != "" ]]; then
     GITREPO="$1"
 elif [[ "$1" = "" ]]; then
