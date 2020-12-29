@@ -1,6 +1,8 @@
 # dbt on Airflow
 Experimental project on managing dbt models on Apache Airflow.
 
+This project has a dependency on Adobe Analytics data being load on BigQuery as described: https://github.com/konosp/adobe-clickstream-dbt
+
 ## Requirements
 There two sample files in the misc/ folder; profile-demo_sample.yml and service_account_key_sample.json. There files are needed for the dbt/BigQuery configuration and for the BigQuery service account that runs within the docker container.
 
